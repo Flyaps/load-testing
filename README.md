@@ -10,19 +10,19 @@ cd load-testing/
 virtualenv --python=python3.7 venv
 source venv/bin/activate
 pip install -r requirements.txt
-python main.py -h
+python -m load_testing -h
 ```
 
 ### Load testing
 ```bash
-python main.py -m='GET'\
-                    -u='https://some.url.com/'\
-                    -head='{"Content-Type": "application/json"}'\
-                    -p='{"some": "params"}'\
-                    -n=100
+python -m load_testing -m='GET'\
+                       -u='https://some.url.com/'\
+                       -head='{"Content-Type": "application/json"}'\
+                       -p='{"some": "params"}'\
+                       -n=100
 
-python main.py -m='GET'\
-                    -u='https://some.url.com/'\
-                    -head='{"Content-Type": "application/json"}'\
-                    -n=100
+python -m load_testing -m='GET'\
+                       -u='https://some.url.com/'\
+                       -head='{"Content-Type": "application/json"}'\
+                       -n=100
 ```
