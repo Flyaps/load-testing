@@ -4,7 +4,7 @@ import asyncio
 from datetime import datetime
 from collections import namedtuple
 
-from load_test import Method, fetch_all, collect_analytics
+from load_testing.core import Method, fetch_all, collect_analytics
 
 
 def main():
