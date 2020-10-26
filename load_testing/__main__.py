@@ -11,11 +11,16 @@ def main():
     default_timeout = 60
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--method', help=f'HTTP method. {Method.available()}',
+    parser.add_argument('-m', '--method',
+                        help=f'HTTP method. {Method.available()}',
                         required=True, type=str)
     parser.add_argument('-u', '--url', help='URL.', required=True, type=str)
-    parser.add_argument('-head', '--headers', help='Headers.', required=True, type=str)
-    parser.add_argument('-p', '--params', help='Parameters.', required=False, type=str, default='{}')
+    parser.add_argument('-head', '--headers',
+                        help='Headers.',
+                        required=True, type=str)
+    parser.add_argument('-p', '--params',
+                        help='Parameters.',
+                        required=False, type=str, default='{}')
     parser.add_argument('-n', '--amount',
                         help=f'Number of requests, defaults to {default_requests}.',
                         default=default_requests, type=int)
