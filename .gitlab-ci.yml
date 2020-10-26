@@ -1,0 +1,14 @@
+image: python:3.7
+
+before_script:
+  - python --version
+  - pip install -r requirements-dev.txt
+
+stages:
+  - analysis
+
+pylint:
+  stage: analysis
+  allow_failure: true
+  script:
+    - pylint load_testing

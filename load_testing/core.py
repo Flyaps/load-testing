@@ -55,7 +55,7 @@ async def fetch(session, request, pid, timeout: aiohttp.ClientTimeout):
         for key, value in (('url', request.url), ('json', request.json))  # params))
         if value
     }
-    async with aiohttp.ClientSession.request(session, request.method, timeout=timeout, **kwargs) as resp:
+    async with session.request(request.method, timeout=timeout, **kwargs) as resp:
         status, finish = resp.status, datetime.now()
         delta = (finish - start).total_seconds()
         message = f'Process {pid} with code {resp.status}: {finish}, took: {delta:.2f} seconds'

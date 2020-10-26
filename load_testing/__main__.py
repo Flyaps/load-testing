@@ -12,11 +12,16 @@ def main():
     default_timeout = 60
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--method', help=f'HTTP method. {Method.available()}',
+    parser.add_argument('-m', '--method',
+                        help=f'HTTP method. {Method.available()}',
                         required=True, type=str)
     parser.add_argument('-u', '--url', help='URL.', required=True, type=str)
-    parser.add_argument('-head', '--headers', help='Headers.', required=True, type=str)
-    parser.add_argument('-p', '--params', help='Parameters.', required=False, type=str, default='{}')
+    parser.add_argument('-head', '--headers',
+                        help='Headers.',
+                        required=True, type=str)
+    parser.add_argument('-p', '--params',
+                        help='Parameters.',
+                        required=False, type=str, default='{}')
     parser.add_argument('-n', '--amount',
                         help=f'Number of requests, defaults to {default_requests}.',
                         default=default_requests, type=int)
@@ -40,7 +45,6 @@ def main():
     print(f'Process started at {datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S%z")}')
     loop = asyncio.get_event_loop()
     results = loop.run_until_complete(asyncio.gather(fetch_all(request, amount, timeout)))[0]
-    print(f'Successfully finished {results[results["status"] < 400].shape[0]} out of {amount} requests.')
     collect_analytics(results)
 
 
