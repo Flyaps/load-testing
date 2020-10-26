@@ -1,10 +1,9 @@
 import argparse
-import json
 import asyncio
+import json
 from datetime import datetime
-from collections import namedtuple
 
-from load_testing.core import Method, fetch_all, collect_analytics
+from load_testing.core import collect_analytics, fetch_all, FetchRequest, Method
 
 
 def main():
@@ -25,8 +24,7 @@ def main():
                         default=default_timeout, type=float)
     args = parser.parse_args()
 
-    Request = namedtuple('Request', ['method', 'url', 'headers', 'json'])
-    request = Request(
+    request = FetchRequest(
         method=args.method,
         url=args.url,
         headers=json.loads(args.headers),
@@ -40,7 +38,6 @@ def main():
     print(f'Process started at {datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S%z")}')
     loop = asyncio.get_event_loop()
     results = loop.run_until_complete(asyncio.gather(fetch_all(request, amount, timeout)))[0]
-    print(f'Successfully finished {results[results["status"] < 400].shape[0]} out of {amount} requests.')
     collect_analytics(results)
 
 
