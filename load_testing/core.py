@@ -56,8 +56,8 @@ def collect_analytics(results: List[FetchResult]):
 
     total_count = sum(counter.values())
 
-    def is_successful(r):
-        return r.status < 400
+    def is_successful(response):
+        return response.status < 400
 
     successful = filter(is_successful, results)
     _collect_on_subset(successful, total_count)
