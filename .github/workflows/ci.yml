@@ -28,7 +28,7 @@ jobs:
 
     - name: Pylint
       run: |
-        pylint load_testing tests
+        pylint load_testing tests/*
 
     - name: Test with pytest
       run: |
