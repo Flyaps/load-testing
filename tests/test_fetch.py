@@ -2,10 +2,9 @@ import asyncio
 
 import pytest
 from aiohttp import ClientSession, ClientTimeout, web
-from aiohttp.test_utils import TestServer
-from yarl import URL
 
 from load_testing.core import fetch, FetchRequest
+from tests.utils import get_url
 
 
 async def test_fetch_get(test_server, capsys):
@@ -85,9 +84,3 @@ async def test_fetch_timeout(test_server, capsys):
             assert server.app['delay'] == delay
             # Don't show output in tests
             capsys.readouterr()
-
-
-def get_url(server: TestServer, name: str) -> URL:
-    relative_url = server.app.router[name].url_for()
-    url = server.make_url(str(relative_url))
-    return url
