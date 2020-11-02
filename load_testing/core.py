@@ -22,15 +22,6 @@ class Method(Enum):
     PATCH = 'PATCH'
     DELETE = 'DELETE'
 
-    @classmethod
-    def available(cls):
-        return f'Available: {", ".join(cls.__members__.keys())}.'
-
-    @classmethod
-    def validate(cls, request):
-        message = f'Method {request.method} is not supported. {cls.available()}'
-        assert request.method in cls.__members__.keys(), message
-
 
 def _collect_on_subset(subset: Iterable[FetchResult], total: int, status='Successful'):
     deltas = list(map(attrgetter('delta'), subset))
