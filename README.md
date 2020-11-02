@@ -13,16 +13,19 @@ pip install -r requirements.txt
 python -m load_testing -h
 ```
 
-### Load testing
+### Usage
+Simple GET
 ```bash
-python -m load_testing -m='GET'\
-                       -u='https://some.url.com/'\
+python -m load_testing -u https://httpbin.org/get -n 10
+```
+
+
+POST a JSON document
+```bash
+python -m load_testing -m='POST'\
+                       -u='https://httpbin.org/post'\
                        -head='{"Content-Type": "application/json"}'\
                        -p='{"some": "params"}'\
-                       -n=100
-
-python -m load_testing -m='GET'\
-                       -u='https://some.url.com/'\
-                       -head='{"Content-Type": "application/json"}'\
-                       -n=100
+                       -n=10\
+                       -t=60
 ```
