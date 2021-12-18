@@ -2,3 +2,4 @@
 pylint==2.6.0
 pytest==6.1.1
 pytest-aiohttp==0.3.0
+yarl==1.5.1
