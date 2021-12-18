@@ -14,6 +14,7 @@ venv.bak/
 
 # IDE, editors
 .idea/
+*.swp
 
 # Unit test / coverage reports
 htmlcov/
