@@ -57,12 +57,15 @@ def collect_analytics(results: List[FetchResult]):
     _collect_on_subset(failed, total_count, status='Failed')
 
 
-async def fetch(session: aiohttp.ClientSession,
-                request: FetchRequest,
-                pid: int,
-                timeout: aiohttp.ClientTimeout) -> FetchResult:
+async def fetch(
+    session: aiohttp.ClientSession,
+    request: FetchRequest,
+    pid: int,
+    timeout: aiohttp.ClientTimeout
+) -> FetchResult:
     start = datetime.now()
     print(f'Started. Process {pid} at {start}: sent to {request.url}')
+
     kwargs = {
         key: value
         for key, value in (('url', request.url), ('json', request.json))  # params))
@@ -80,17 +83,23 @@ async def fetch(session: aiohttp.ClientSession,
         return result
 
 
-async def fetch_all(request: FetchRequest,
-                    amount: int,
-                    timeout: float) -> List[FetchResult]:
+async def fetch_all(
+    request: FetchRequest,
+    amount: int,
+    timeout: float
+) -> List[FetchResult]:
     client_timeout = aiohttp.ClientTimeout(total=timeout)
-    async with aiohttp.ClientSession(headers=request.headers, timeout=client_timeout) as session:
+
+    async with aiohttp.ClientSession(
+        headers=request.headers, timeout=client_timeout
+    ) as session:
         futures = [
             asyncio.ensure_future(fetch(session, request, i, client_timeout))
             for i in range(1, amount + 1)
         ]
         done, pending = await asyncio.wait(
-            futures, timeout=timeout)
+            futures, timeout=timeout
+        )
 
         for future in pending:
             future.cancel()
