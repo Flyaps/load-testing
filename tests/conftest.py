@@ -1,3 +1,6 @@
+# pylint: disable-all
+# pylint comlains on astroid.exceptions.AttributeInferenceError: 'router' not found on <ClassDef.Application l.80 at 0x10b614fd0>.
+
 import asyncio
 import json
 from collections import deque
